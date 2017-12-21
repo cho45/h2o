@@ -134,6 +134,15 @@ builder {
             [$env->{"REMOTE_PORT"} || ''],
         ];
     };
+    mount "/echo-request-uri" => sub {
+        my $env = shift;
+        return [
+            200,
+            [
+            ],
+            [$env->{"REQUEST_URI"} || ''],
+        ];
+    };
     mount "/sni-name" => sub {
         my $env = shift;
         [200, [], [$env->{"psgix.io"}->get_servername]];
